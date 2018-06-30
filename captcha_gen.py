@@ -107,12 +107,15 @@ def generate(GENNUM, SAVEPATH, ENGP=25, FIVEP=0, ENGNOLIMIT=False, filename="tra
         for obj in rectlist:
             obj.draw(image=captcha, overlay=True)
         captcha.convert("RGB").save(SAVEPATH + str(index).zfill(len(str(GENNUM))) + ".jpg", "JPEG")
+        if index%1000==0:
+            print(index, 'captcha generated')
     writer = csv.writer(captchacsv)
     writer.writerows(letterlist)
     writer = csv.writer(lencsv)
     writer.writerows(lenlist)
     captchacsv.close()
     lencsv.close()
+    print(SAVEPATH, 'generated')
 
 
 if __name__ == "__main__":

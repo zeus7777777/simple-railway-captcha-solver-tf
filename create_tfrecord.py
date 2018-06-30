@@ -42,7 +42,7 @@ def main(captcha_file, prefix, tfrecord_path):
 
     file_names, captchas = parse_csv_captcha(captcha_file)
     for j in range(len(file_names)):
-        with tf.gfile.FastGFile(prefix[i]+file_names[j]+'.jpg' , 'rb') as f:
+        with tf.gfile.FastGFile(prefix+file_names[j]+'.jpg' , 'rb') as f:
             jpeg_str = f.read()
         example = tf.train.Example(features=tf.train.Features(feature={
             'jpeg_str': _bytes_feature(tf.compat.as_bytes(jpeg_str)),
@@ -83,4 +83,4 @@ if __name__=='__main__':
         'tfrecord/images_valid_56.tfrecord'
     ]
     for i in range(len(captcha_files)):
-        main(captcha_file[i], prefix[i], tfrecord_path[i])
+        main(captcha_files[i], prefix[i], tfrecord_path[i])
